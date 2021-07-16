@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { StudentListingComponent } from './student-listing/student-listing.component';
+import { AddStudentComponent } from './add-student/add-student.component';
 
 
 const routes: Routes = [
   {
 
     path: "list", component: StudentListingComponent,
+  },
+  {
+
+    path: "add", component: AddStudentComponent,
   }
 
 

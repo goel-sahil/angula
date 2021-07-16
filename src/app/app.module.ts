@@ -7,17 +7,23 @@ import { StudentListingComponent } from './student-listing/student-listing.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatSelectModule } from '@angular/material/select';
+import { HttpClientModule } from '@angular/common/http';
+import { AddStudentComponent } from './add-student/add-student.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentListingComponent
+    StudentListingComponent,
+    AddStudentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatTableModule,
+    MatSelectModule,
     MatPaginatorModule
   ],
   providers: [],

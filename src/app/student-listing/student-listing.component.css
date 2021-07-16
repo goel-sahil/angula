@@ -1,3 +1,8 @@
 table {
   width: 100%;
+  
+}
+.vl {
+  border-left: 6px solid green;
+  height: 500px;
 }
