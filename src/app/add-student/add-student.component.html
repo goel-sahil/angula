@@ -1,1 +1,48 @@
-<p>add-student works!</p>
+<div class="container-lg">
+
+    <div class="row">
+        <div class="col-md-7 col-xs-12">
+            <form class="contact-form" [formGroup]="addStudentForms" (submit)="onSubmit(addStudentForms.value)"
+                autocomplete="off">
+                <h2 class="subheading">Add Student Info</h2>
+                <div class="mb-3">
+                    <mat-form-field class="full-width" color="accent" appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput formControlName="firstname" type="text" required />
+                    </mat-form-field>
+                </div>
+                <div class="mb-3">
+                    <mat-form-field class="full-width" color="accent" appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="lastname" type="text" required />
+                    </mat-form-field>
+                </div>
+
+                <div class="mb-3">
+                    <mat-form-field class="full-width" color="accent" appearance="outline">
+                        <mat-label>Marks</mat-label>
+                        <input matInput formControlName="marks" type="number" required />
+                    </mat-form-field>
+                </div>
+                <div class="mb-3">
+                    <mat-form-field class="full-width" color="accent" appearance="outline">
+                        <mat-select matInput formControlName="class">
+                            <option selected value="">Select Class</option>
+                            <mat-option>
+                                ...
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="custom-row my-2">
+
+                    <button class="pull-right min-width" title="Submit" mat-raised-button color="primary">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

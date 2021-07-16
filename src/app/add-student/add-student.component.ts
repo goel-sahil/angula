@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from "@angular/forms";
 
 @Component({
   selector: 'app-add-student',
@@ -6,10 +7,47 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-student.component.css']
 })
 export class AddStudentComponent implements OnInit {
+  addStudentForms: FormGroup;
+  constructor(private fb: FormBuilder) { }
 
-  constructor() { }
+  ngOnInit() {
+    this.addStudentForms = this.fb.group({
+      firstname: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50),
 
-  ngOnInit(): void {
+        ]
+      ],
+      lastname: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50),
+        ]
+      ],
+      marks: [
+        "",
+        [
+          Validators.required
+        ]
+      ],
+      class: [
+        "",
+        [
+          Validators.required
+        ]
+        // Validators.compose(),
+      ],
+    });
+  }
+
+
+  onSubmit(value: any) {
+    console.log(value)
   }
 
 }
