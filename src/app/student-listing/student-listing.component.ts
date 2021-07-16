@@ -27,13 +27,47 @@ export class StudentListingComponent implements AfterViewInit {
     this.getStudentData();
   }
 
+  /**
+   * Student Listing
+   */
   getStudentData() {
     this.studentService
-      .getData()
+      .getStudents()
       .subscribe((res: any) => {
-        console.log(res)
-        this.studentData = res;
+        let students: any = [];
+        res.students.forEach((student: any) => {
+          student.marks.forEach((subject: any, index: any) => {
+            students.push({
+              id: student.id,
+              firstName: student.firstName,
+              lastName: student.lastName,
+              class: subject.class_subject.class.title,
+              subject: subject.class_subject.subject.title,
+              marks: subject.marks,
+              isFirstRow: index == 0 ? true : false
+            });
+          });
+        });
+        this.studentData = students;
       });
+  }
+
+  /**
+   * Delete Student
+   */
+  deleteStudent(id: any) {
+    this.studentService
+      .deleteStudent(id)
+      .subscribe(() => {
+        this.getStudentData();
+      });
+  }
+
+  /**
+   * Edit Student
+   */
+  editStudent(id: any) {
+    // this.router.navigate()
   }
 }
 
