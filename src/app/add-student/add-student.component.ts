@@ -142,10 +142,7 @@ export class AddStudentComponent implements OnInit {
       .getSubjects(id)
       .subscribe((res: any) => {
         this.subjectData = res.subjects;
-
         this.marks.clear();
-
-
         // Make the form for Marks for each subject
         this.subjectData.forEach((item: any, i: any) => {
           this.addMarksForm();
