@@ -57,14 +57,13 @@ export class AddStudentComponent implements OnInit {
     this.studentService
       .getStudentById(id)
       .subscribe((res: any) => {
-
         this.studentData = res.student;
         console.log(this.studentData.marks[0].class_subject.classId)
         this.addStudentForms.patchValue({
           firstName: this.studentData.firstName,
           lastName: this.studentData.lastName
         });
-        this.addStudentForms.controls["class"].setValue(this.studentData.marks[0].class_subject.class.classId);
+        this.addStudentForms.controls["class"].setValue(this.studentData.marks[0].class_subject.class.classId); this.getSubjects(this.studentData.marks[0].class_subject.classId);
       });
   }
   get marks(): FormArray {
@@ -105,6 +104,7 @@ export class AddStudentComponent implements OnInit {
       .getSubjects(event.value)
       .subscribe((res: any) => {
         this.subjectData = res.subjects;
+        console.log(this.subjectData)
         this.addStudentForms.controls['marks'].setValue([]);
         this.subjectData.forEach(() => {
           this.addMarksForm();
