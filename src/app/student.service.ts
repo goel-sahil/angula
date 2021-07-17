@@ -19,6 +19,14 @@ export class StudentService {
   }
 
   /**
+    * Get Student data by id
+    * @returns
+    */
+  getStudentById(id: any) {
+    return this.httpClient.get(this.serverApiUrl + '/students/student/' + id);
+  }
+
+  /**
    * Get Subjects
    * @returns 
    */

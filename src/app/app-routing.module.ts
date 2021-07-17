@@ -8,12 +8,13 @@ import { AddStudentComponent } from './add-student/add-student.component';
 const routes: Routes = [
   {
 
-    path: "list", component: StudentListingComponent,
+    path: "", component: StudentListingComponent,
   },
   {
 
     path: "add", component: AddStudentComponent,
-  }
+  },
+  { path: "edit/:id", component: AddStudentComponent },
 
 
 ];

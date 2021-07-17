@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { StudentService } from '../student.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-listing',
@@ -14,7 +15,7 @@ import { StudentService } from '../student.service'
 export class StudentListingComponent implements AfterViewInit {
   public studentData = [];
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService, private route: Router) { }
   displayedColumns: string[] = ['id', 'firstname', 'lastname', 'class', 'subject', 'marks', 'actions'];
   dataSource = new MatTableDataSource(this.studentData);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -67,7 +68,8 @@ export class StudentListingComponent implements AfterViewInit {
    * Edit Student
    */
   editStudent(id: any) {
-    // this.router.navigate()
+    console.log(id)
+    this.route.navigate([`edit/`, id]);
   }
 }
 

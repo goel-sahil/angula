@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective, FormArray } from "@angular/forms";
 import { StudentService } from '../student.service';
-
+import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: 'app-add-student',
   templateUrl: './add-student.component.html',
@@ -10,14 +10,23 @@ import { StudentService } from '../student.service';
 export class AddStudentComponent implements OnInit {
   addStudentForms: FormGroup;
   public classData: any = [];
-  constructor(private fb: FormBuilder, private studentService: StudentService) { }
+  constructor(private fb: FormBuilder, private studentService: StudentService, private route: ActivatedRoute, private router: Router) { }
   public subjectData: any = [];
+  public studentData: any = [];
   public editStudent: any = '';
 
   ngOnInit() {
     this.getClassData();
+    let sub = this.route.params.subscribe((params: any) => {
+      this.editStudent = params["id"];
+
+      if (this.editStudent) {
+        this.getStudentDataById(this.editStudent);
+      }
+    });
+
     this.addStudentForms = this.fb.group({
-      firstname: [
+      firstName: [
         "",
         [
           Validators.required,
@@ -26,7 +35,7 @@ export class AddStudentComponent implements OnInit {
 
         ]
       ],
-      lastname: [
+      lastName: [
         "",
         [
           Validators.required,
@@ -44,6 +53,20 @@ export class AddStudentComponent implements OnInit {
     });
   }
 
+  getStudentDataById(id: any) {
+    this.studentService
+      .getStudentById(id)
+      .subscribe((res: any) => {
+
+        this.studentData = res.student;
+        console.log(this.studentData.marks[0].class_subject.classId)
+        this.addStudentForms.patchValue({
+          firstName: this.studentData.firstName,
+          lastName: this.studentData.lastName
+        });
+        this.addStudentForms.controls["class"].setValue(this.studentData.marks[0].class_subject.class.classId);
+      });
+  }
   get marks(): FormArray {
     return this.addStudentForms.get("marks") as FormArray;
   }
@@ -92,20 +115,21 @@ export class AddStudentComponent implements OnInit {
   onSubmit(value: any) {
     this.subjectData.forEach((item: any, i: any) => {
       value.marks[i].classSubjectId = item.id
+      value.marks[i].marks = value.marks[i].total
     });
 
     if (this.editStudent) {
       this.studentService
         .updateStudent(this.editStudent, value)
         .subscribe((res: any) => {
-          this.route.navigate(['/list']);
+          this.router.navigate(['']);
         });
 
     } else {
       this.studentService
         .addStudent(value)
         .subscribe((res: any) => {
-          this.route.navigate(['/list']);
+          this.router.navigate(['']);
         });
 
     }
