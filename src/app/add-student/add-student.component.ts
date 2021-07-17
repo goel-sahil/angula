@@ -74,16 +74,12 @@ export class AddStudentComponent implements OnInit {
           firstName: this.studentData.firstName,
           lastName: this.studentData.lastName
         });
-<<<<<<< HEAD
-        this.addStudentForms.controls["class"].setValue(this.studentData.marks[0].class_subject.class.classId); this.getSubjects(this.studentData.marks[0].class_subject.classId);
-=======
 
         // Set the class
         this.addStudentForms.controls["class"].setValue(this.studentData.marks[0].class_subject.classId);
 
         // Get the subjects for this class
         this.subjectsInUI(this.studentData.marks[0].class_subject.classId, true);
->>>>>>> e8805ea5b037ca0f224ecb08cb07e6eca236911f
       });
   }
 
@@ -146,12 +142,8 @@ export class AddStudentComponent implements OnInit {
       .getSubjects(id)
       .subscribe((res: any) => {
         this.subjectData = res.subjects;
-<<<<<<< HEAD
-        console.log(this.subjectData)
-=======
 
         // Make the form for Marks for each subject
->>>>>>> e8805ea5b037ca0f224ecb08cb07e6eca236911f
         this.addStudentForms.controls['marks'].setValue([]);
         this.subjectData.forEach((item: any, i: any) => {
           this.addMarksForm();
