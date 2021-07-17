@@ -2,7 +2,10 @@ table {
   width: 100%;
   
 }
-.vl {
-  border-left: 6px solid green;
-  height: 500px;
+.linkBtn{
+
+  color: gray ;
+  background-color: transparent;
+  text-decoration: none;
+
 }
