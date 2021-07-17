@@ -1,5 +1,4 @@
 <div class="container-lg">
-
     <div class="row">
         <div class="col-md-7 col-xs-12">
             <form class="contact-form" [formGroup]="addStudentForms" (submit)="onSubmit(addStudentForms.value)"
@@ -17,27 +16,33 @@
                         <input matInput formControlName="lastname" type="text" required />
                     </mat-form-field>
                 </div>
-
                 <div class="mb-3">
-                    <mat-form-field class="full-width" color="accent" appearance="outline">
-                        <mat-label>Marks</mat-label>
-                        <input matInput formControlName="marks" type="number" required />
-                    </mat-form-field>
-                </div>
-                <div class="mb-3">
-                    <mat-form-field class="full-width" color="accent" appearance="outline">
-                        <mat-select matInput formControlName="class">
-                            <option selected value="">Select Class</option>
-                            <mat-option>
-                                ...
+                    <mat-form-field appearance="fill">
+                        <mat-label>Class</mat-label>
+                        <mat-select formControlName="class" (selectionChange)="getSubjects($event)">
+                            <mat-option *ngFor="let classItem of classData" [value]="classItem.id">{{classItem.title}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
-
-
+                <div class="add-lessons-form">
+                    <ng-container formArrayName="marks">
+                        <ng-container *ngFor="let markForm of marks.controls; let i = index">
+                            <div class="lesson-form-row" [formGroupName]="i">
+                                <div>
+                                    <mat-label>Subject: {{subjectData[i].subject.title}}</mat-label>
+                                </div>
+                                <div class=" mb-3">
+                                    <mat-form-field class="full-width" color="accent" appearance="outline">
+                                        <mat-label>Marks</mat-label>
+                                        <input matInput formControlName="total" type="number" required />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
                 <div class="custom-row my-2">
-
                     <button class="pull-right min-width" title="Submit" mat-raised-button color="primary">
                         Submit
                     </button>

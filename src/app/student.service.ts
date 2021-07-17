@@ -15,7 +15,7 @@ export class StudentService {
    * @returns 
    */
   getClasses() {
-    return this.httpClient.get(this.serverApiUrl + '/subjects/classes');
+    return this.httpClient.get(this.serverApiUrl + '/students/classes');
   }
 
   /**
